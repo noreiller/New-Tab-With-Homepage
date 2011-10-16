@@ -1,0 +1,41 @@
+const tabs = require("tabs");
+const hotkeys = require("hotkeys");
+
+var SEInputIds = {
+  'google': 'lst-ib',
+  'bing': 'sb_form_q'
+};
+
+tabs.on('open', function (tab) {
+  tab.on('ready', function (tab) {
+    var hp = require('preferences-service').get('browser.startup.homepage', 'about:blank');
+    if (tab.url == 'about:blank' && hp != 'about:blank' && tab.index == tabs.activeTab.index) {
+      tab.url = hp;
+      
+      var input = '';
+      if (hp.indexOf('google') != -1)
+        input = SEInputIds.google;
+      else if (hp.indexOf('bing') != -1)
+        input = SEInputIds.bing;
+
+      if (input != '') {
+        tab.attach({
+          contentScript: 'if (document.getElementById("' + input + '")) document.getElementById("' + input + '").focus();'
+        });
+      }
+    }
+  });
+});
+
+hotkeys.Hotkey({
+  combo: "accel-alt-m",
+  onPress: function() {
+    tabs.open({
+      url: 'about:blank',
+      inBackground: true,
+      onReady: function (tab) {
+        tab.activate();
+      }
+    });
+  }
+});

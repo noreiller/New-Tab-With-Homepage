@@ -1,0 +1,9 @@
+{
+  "name": "new-tab-homepage",
+  "fullName": "New tab homepage",
+  "description": "This addons opens the homepage when opening a new tab, instead of an empty one. You still can open an empty page with ctrl+alt+M.",
+  "author": "Aurélien MANCA <aurelien.manca@gmail.com>",
+  "license": "MPL 1.1/GPL 2.0/LGPL 2.1",
+  "version": "0.1",
+  "id": "jid0-aMBt42zlSdAxvb8TmriHGAki9gI"
+}
